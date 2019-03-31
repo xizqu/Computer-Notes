@@ -1,3 +1,10 @@
+# Lists
+### Slicing
+- Var[start:end:step]
+- Var[1:] - Inclusive of 1
+- Var[:1] - Exclusive of 1
+
+# Template 
 # Language
 
 The complete JavaScript implementation is made up of three distinct parts:
