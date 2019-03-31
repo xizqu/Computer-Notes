@@ -3,6 +3,7 @@
 - Var[start : end : step]
 - Var[1:] - Inclusive of 1
 - Var[:1] - Exclusive of 1
+- Var[::-1] - Steps backwards
 
 # Template 
 # Language
