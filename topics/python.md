@@ -5,6 +5,11 @@
 - Var[:1] - Exclusive of 1
 - Var[::-1] - Steps backwards
 
+# List Comprehension
+- [num for num in old_list]
+- [num for num in old_list if condition]
+- [num if condition else num2 for num in old_list]
+
 # Template 
 # Language
 
