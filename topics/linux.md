@@ -159,7 +159,7 @@ Generate a random 14 character password by using the linux `/dev/urandom` file, 
 
 # Resources & Books
 
-[Mastering the Shell](https://thoughtbot.com/upcase/mastering-the-shell) (Beginner Friendly)
-[The Art of the Command Line](https://github.com/jlevy/the-art-of-command-line) (Beginner Friendly)
-[LS Linux Study Group](https://github.com/icevans/linux-study-group) (Intermediate)
-[The Linkus Command Line](http://linuxcommand.org/tlcl.php) (Intermediate)
+[Mastering the Shell](https://thoughtbot.com/upcase/mastering-the-shell) (Beginner Friendly)  
+[The Art of the Command Line](https://github.com/jlevy/the-art-of-command-line) (Beginner Friendly)  
+[LS Linux Study Group](https://github.com/icevans/linux-study-group) (Intermediate)  
+[The Linkus Command Line](http://linuxcommand.org/tlcl.php) (Intermediate)  
