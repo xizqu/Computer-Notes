@@ -289,20 +289,13 @@ When you are writing programs, you want your data to make the right decisions. Y
 
 ## Comparisons
 Greater than ```>```  
-Less than ```<```
-
-Greater than or equal to ```>=```
-
-Less than or equal to ```<=```
-
-Equal to ```==```
-
-Not equal to ```!=```
-
-And ```&&```
-
-Or ```||```
-
+Less than ```<```  
+Greater than or equal to ```>=```  
+Less than or equal to ```<=```  
+Equal to ```==```  
+Not equal to ```!=```  
+And ```&&```  
+Or ```||```  
 NOT ```!```
 
 ## If/else
