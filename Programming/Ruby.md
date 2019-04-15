@@ -1,3 +1,7 @@
+# Credits to Author
+
+All of these notes come from "Introduction to Programming" by Launch School. If you like these notes, please take a look at their course.
+
 # Language
 
 Ruby was made in 1990
