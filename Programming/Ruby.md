@@ -181,7 +181,40 @@ end
 Sometimes, when calling a method, the argument can be altered permanently. We call this mutating the caller.
 
 ```ruby
+a = [1, 2, 3]
 
+# Example of a method definition that modifies its argument permanently
+def mutate(array)
+  array.pop
+end
+
+p "Before mutate method: #{a}"
+mutate(a)
+p "After mutate method: #{a}"
+```
+
+How do you know which methods mutate the caller and which ones don't? Unfortunately, you have to memorize it by looking at the documentation or through repetition.
+ 
+## Return
+
+Every method returns the evaluated result of the last line that is executed.
+
+```ruby
+a = [1, 2, 3]
+
+def mutate(array)
+  array.pop
+end
+
+p "Before mutate method: #{a}"
+p mutate(a)
+p "After mutate method: #{a}"
+
+# Output
+"Before mutate method: [1, 2, 3]"
+3
+"After mutate method: [1, 2]"
+```
 
 # Useful
 
