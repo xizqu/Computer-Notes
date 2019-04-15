@@ -2,6 +2,22 @@
 
 Ruby was made in 1990
 
+Memorizing small differences in syntax is unfortunately one of the necessary tasks a Ruby programmer must go through. Ruby is a very expressive language. Part of what makes that possible is the ability to do things in more than one way.
+
+# Blocks
+
+A block is just some lines of code ready to be executed. When working with blocks there are two styles you need to be aware of. By convention, we use the curly braces ```{}``` when everything can be contained in one line. We use the words ```do``` and ```end``` when we are performing multi-line operations.
+
+```ruby
+names = ['Bob', 'Joe', 'Steve', 'Janice', 'Susan', 'Helen']
+x = 1
+
+names.each do |name|               # Block begins here
+  puts "#{x}. #{name}"
+  x += 1
+end
+```
+
 # Variables
 
 ```ruby
@@ -122,6 +138,116 @@ You'll notice that say() prints hello. to the console. We have provided a defaul
 
 Say() could be rewritten as just say. With arguments, instead of say("hi"), it could just be say "hi". This leads to more fluid reading of code, but sometimes it can be confusing. Keep that in mind when you're reading Ruby; it can get tricky deciphering between local variables and method names!
 
+## Arguments
+
+```ruby
+def add(a, b)
+  a + b
+end
+
+def subtract(a, b)
+  a - b
+end
+
+add(20, 45)
+=> 65
+# returns 65
+
+subtract(80, 10)
+=> 70
+# returns 70
+
+# You can use other methods as arguments too
+multiply(add(20, 45), subtract(80, 10))
+=> 4550
+# returns 4550
+```
+
+## Mutating The Caller
+
+Sometimes, when calling a method, the argument can be altered permanently. We call this mutating the caller.
+
+```ruby
+a = [1, 2, 3]
+
+# Example of a method definition that modifies its argument permanently
+def mutate(array)
+  array.pop
+end
+
+p "Before mutate method: #{a}"
+mutate(a)
+p "After mutate method: #{a}"
+```
+
+How do you know which methods mutate the caller and which ones don't? Unfortunately, you have to memorize it by looking at the documentation or through repetition.
+ 
+## Return
+
+Ruby methods **ALWAYS** return the evaluated result of the last line of the expression unless an explicit return comes before it.
+
+```ruby
+def add_three(number)
+  number + 3
+end
+
+returned_value = add_three(4)
+puts returned_value
+```
+
+Here we're saving the returned value of the ```add_three``` method invocation in a variable called ```returned_value```.
+
+## Chaining Methods
+
+Because we know for certain that every method call returns something, we can chain methods together, which gives us the ability to write extremely expressive and succinct code.
+
+```ruby
+def add_three(n)
+  n + 3
+end
+
+add_three(5)                                           # returns 8
+
+add_three(5).times { puts 'this should print 8 times'} # This will actually print 8 times due to the chain
+```
+
+However, you must be careful. If a method returns nil, you may get an error. Here's the same code but using puts instead of return for ```add_three```
+
+```ruby
+def add_three(n)
+  puts n + 3   # Returns nil
+end
+
+add_three(5).times { puts "will this work?" }
+
+# Error Message
+NoMethodError: undefined method `times' for nil:NilClass
+```
+
+This is a very important aspect of chaining methods together: if anywhere along the chain, there's a nil or an exception is thrown, the entire chained call will break down.
+
+## Recursion
+
+Recursion is another way to create a loop in Ruby. Recursion is the act of calling a method from within itself.
+
+```ruby
+def fibonacci(number)
+  if number < 2
+    number
+  else
+    fibonacci(number - 1) + fibonacci(number - 2)
+  end
+end
+
+puts fibonacci(6)
+```
+
+!(https://d2aw5xe2jldque.cloudfront.net/books/ruby/images/fibonacci_diagram.jpg)
+
+Each time the code branches off again you are calling the ```fibonacci``` function from within itself two times. If you take all of those ones and zeros and add them together, you'll get the same answer you get when you run the code.
+
+The key concept with recursion is that there is some baseline condition that returns a value, which then "unwinds" the recursive calls. You can think of the successive recursive calls building up, until some value is returned, and only then can the recursive calls be evaluated.
+
 # Scope
 
 ## Variable Scope
@@ -176,44 +302,148 @@ def print_num(num)
 end
 ```
 
-## Mutating The Caller
+# Flow Control
 
-Sometimes, when calling a method, the argument can be altered permanently. We call this mutating the caller.
+When you are writing programs, you want your data to make the right decisions. You want your data to do the right thing when it's supposed to. In computer programming, this is called conditional flow.
+
+## Comparisons
+Greater than ```>```
+Less than ```<```
+Greater than or equal to ```>=```
+Less than or equal to ```<=```
+Equal to ```==```
+Not equal to ```!=```
+And ```&&```
+Or ```||```
+NOT ```!```
+
+## If/else
+
+In Ruby, every expression evaluates to true when used in flow control, except for false and nil.
 
 ```ruby
-a = [1, 2, 3]
-
-# Example of a method definition that modifies its argument permanently
-def mutate(array)
-  array.pop
+if x == 5
+  puts "how can this be true?"
+else
+  puts "it is not true"
 end
-
-p "Before mutate method: #{a}"
-mutate(a)
-p "After mutate method: #{a}"
 ```
 
-How do you know which methods mutate the caller and which ones don't? Unfortunately, you have to memorize it by looking at the documentation or through repetition.
- 
-## Return
+## Ternary Operator
 
-Every method returns the evaluated result of the last line that is executed.
+Ruby has a nice option for short and concise conditional if statements. The ternary operator is a common Ruby idiom that makes a quick if/else statement easy and keeps it all on one line.
 
 ```ruby
-a = [1, 2, 3]
+# Ternary operator example
 
-def mutate(array)
-  array.pop
+true ? "this is true" : "this is not true"
+ => "this is true"
+
+false ? "this is true" : "this is not true"
+ => "this is not true"
+```
+
+## Case
+
+Case statements use the reserved words ```case```, ```when```, ```else```, and ```end```.
+
+```ruby
+# case_statement.rb
+
+a = 5
+
+case a
+when 5
+  puts "a is 5"
+when 6
+  puts "a is 6"
+else
+  puts "a is neither 5, nor 6"
+end
+```
+
+# Loops
+
+## Loop Do
+
+```ruby
+i = 0
+loop do
+  i += 2
+  if i == 4
+    next        # skip rest of the code in this iteration
+  end
+  puts i
+  if i == 10
+    break
+  end
+end
+```
+
+## While Loop
+
+```ruby
+x = gets.chomp.to_i
+
+while x >= 0
+  puts x
+  x -= 1 # <- refactored this line
 end
 
-p "Before mutate method: #{a}"
-p mutate(a)
-p "After mutate method: #{a}"
+puts "Done!"
+```
 
-# Output
-"Before mutate method: [1, 2, 3]"
-3
-"After mutate method: [1, 2]"
+## Until Loop
+
+The until loop is simply the opposite of the while loop. 
+
+```ruby
+x = gets.chomp.to_i
+
+until x < 0
+  puts x
+  x -= 1
+end
+
+puts "Done!"
+```
+
+## Do/While Loop
+
+A do/while loop works in a similar way to a while loop; one important difference is that the code within the loop gets executed one time, prior to the conditional check to see if the code should be executed. In a "do/while" loop, the conditional check is placed at the end of the loop as opposed to the beginning.
+
+```ruby
+loop do
+  puts "Do you want to do that again?"
+  answer = gets.chomp
+  if answer != 'Y'
+    break
+  end
+end
+```
+
+## For Loop
+
+The odd thing about the for loop is that the loop returns the collection of elements after it executes, whereas the earlier while loop examples return nil. 
+
+```ruby
+x = gets.chomp.to_i
+
+for i in 1..x do
+  puts i
+end
+
+puts "Done!"
+```
+
+## Iterators
+
+Iterators are methods that naturally loop over a given set of data and allow you to operate on each element in the collection.
+
+```ruby
+names = ['Bob', 'Joe', 'Steve', 'Janice', 'Susan', 'Helen']
+
+names.each { |name| puts name }
 ```
 
 # Useful
