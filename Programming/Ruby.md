@@ -1,8 +1,6 @@
 # Language
 
-The complete ruby implementation is made up of three distinct parts:
-
-
+Ruby was made in 1990
 
 # Variables
 
@@ -87,13 +85,52 @@ Instance variables are declared by starting the variable name with one @ sign. T
 @var = 'I am available throughout the current instance of this class.'
 ```
 
-## Scope
+# Methods
+
+You'll often have a piece of code that needs to be executed many times in a program. Instead of writing that piece of code over and over, there's a feature in most programming languages called a procedure, which allows you to extract the common code to one place. In Ruby, we call it a **method**.
+
+```ruby
+def say(words)
+  puts words
+end
+
+say("hello")
+say("hi")
+say("how are you")
+say("I'm fine")
+```
+
+You'll notice that there's a ```(words)``` after ```say``` in the method definition. This is what's called a parameter. Parameters are used when you have data outside of a method definition's scope, but you need access to it within the method definition.
+
+## Default Parameters
+
+Default Parameters
+When you're defining methods you may want to structure your method definition so that it always works, whether given parameters or not. Let's restructure our say method definition again so that we can assign a default parameter in case the caller doesn't send any arguments.
+
+```ruby
+say.rb
+def say(words='hello')
+  puts words + '.'
+end
+
+say()
+say("hi")
+say("how are you")
+say("I'm fine")
+You'll notice that say() prints hello. to the console. We have provided a default parameter that is used whenever our method is called without any arguments. Nice!
+```
+
+Say() could be rewritten as just say. With arguments, instead of say("hi"), it could just be say "hi". This leads to more fluid reading of code, but sometimes it can be confusing. Keep that in mind when you're reading Ruby; it can get tricky deciphering between local variables and method names!
+
+# Scope
+
+## Variable Scope
 
 A variable's scope determines where in a program a variable is available for use. A variable's scope is defined by where the variable is initialized or created. 
 
 In Ruby, variable scope is defined by a block.
 
-*Inner scope can access variables initialized in an outer scope, but not vice versa.*
+**Inner scope can access variables initialized in an outer scope, but not vice versa.**
 
 ```ruby
 # scope.rb
@@ -111,22 +148,39 @@ puts b            # b is not accessible and will cause an error
 
 for...do/end code does not create a new inner scope, since for is part of Ruby language and not a method invocation. When we use .each, .times and other method invocations, followed by {} or do/end, that's when a new block is created.
 
-# Methods
+## Method Scope
 
-You'll often have a piece of code that needs to be executed many times in a program. Instead of writing that piece of code over and over, there's a feature in most programming languages called a procedure, which allows you to extract the common code to one place. In Ruby, we call it a *method*.
+A method definition creates its own scope outside the regular flow of execution.
 
 ```ruby
-def say(words)
-  puts words
+a = 5            # Lets call this object 1
+
+def some_method
+  a = 3          # This is will be object 2 as it has a different location in memory
 end
 
-say("hello")
-say("hi")
-say("how are you")
-say("I'm fine")
+puts a           # This will output object 1 which equals 5
+```
+Make sure you don't mix up **method invocation** with a block and **method definition** when you're working with local variable scope issues.
+
+```ruby
+# Method invocation with a block
+
+[1, 2, 3].each do |num|
+  puts num
+end
+# Method definition
+
+def print_num(num)
+  puts num
+end
 ```
 
-You'll notice that there's a ```(words)``` after ```say``` in the method definition. This is what's called a parameter. Parameters are used when you have data outside of a method definition's scope, but you need access to it within the method definition.
+## Mutating The Caller
+
+Sometimes, when calling a method, the argument can be altered permanently. We call this mutating the caller.
+
+```ruby
 
 
 # Useful
@@ -134,7 +188,3 @@ You'll notice that there's a ```(words)``` after ```say``` in the method definit
 ## Truthy / Falsy
 
 Everything in ruby is truthy except false and nil
-
-# Debugging
-
-Pry and rubocop are your best friends
