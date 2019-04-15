@@ -137,7 +137,6 @@ say()
 say("hi")
 say("how are you")
 say("I'm fine")
-You'll notice that say() prints hello. to the console. We have provided a default parameter that is used whenever our method is called without any arguments. Nice!
 ```
 
 Say() could be rewritten as just say. With arguments, instead of say("hi"), it could just be say "hi". This leads to more fluid reading of code, but sometimes it can be confusing. Keep that in mind when you're reading Ruby; it can get tricky deciphering between local variables and method names!
@@ -290,13 +289,21 @@ When you are writing programs, you want your data to make the right decisions. Y
 
 ## Comparisons
 Greater than ```>```
+
 Less than ```<```
+
 Greater than or equal to ```>=```
+
 Less than or equal to ```<=```
+
 Equal to ```==```
+
 Not equal to ```!=```
+
 And ```&&```
+
 Or ```||```
+
 NOT ```!```
 
 ## If/else
