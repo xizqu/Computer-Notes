@@ -230,28 +230,6 @@ NoMethodError: undefined method `times' for nil:NilClass
 
 This is a very important aspect of chaining methods together: if anywhere along the chain, there's a nil or an exception is thrown, the entire chained call will break down.
 
-## Recursion
-
-Recursion is another way to create a loop in Ruby. Recursion is the act of calling a method from within itself.
-
-```ruby
-def fibonacci(number)
-  if number < 2
-    number
-  else
-    fibonacci(number - 1) + fibonacci(number - 2)
-  end
-end
-
-puts fibonacci(6)
-```
-
-!(https://d2aw5xe2jldque.cloudfront.net/books/ruby/images/fibonacci_diagram.jpg)
-
-Each time the code branches off again you are calling the ```fibonacci``` function from within itself two times. If you take all of those ones and zeros and add them together, you'll get the same answer you get when you run the code.
-
-The key concept with recursion is that there is some baseline condition that returns a value, which then "unwinds" the recursive calls. You can think of the successive recursive calls building up, until some value is returned, and only then can the recursive calls be evaluated.
-
 # Scope
 
 ## Variable Scope
@@ -449,6 +427,28 @@ names = ['Bob', 'Joe', 'Steve', 'Janice', 'Susan', 'Helen']
 
 names.each { |name| puts name }
 ```
+
+## Recursion
+
+Recursion is another way to create a loop in Ruby. Recursion is the act of calling a method from within itself.
+
+```ruby
+def fibonacci(number)
+  if number < 2
+    number
+  else
+    fibonacci(number - 1) + fibonacci(number - 2)
+  end
+end
+
+puts fibonacci(6)
+```
+
+![alt](https://d2aw5xe2jldque.cloudfront.net/books/ruby/images/fibonacci_diagram.jpg "fibonacci")
+
+Each time the code branches off again you are calling the ```fibonacci``` function from within itself two times. If you take all of those ones and zeros and add them together, you'll get the same answer you get when you run the code.
+
+The key concept with recursion is that there is some baseline condition that returns a value, which then "unwinds" the recursive calls. You can think of the successive recursive calls building up, until some value is returned, and only then can the recursive calls be evaluated.
 
 # Useful
 
